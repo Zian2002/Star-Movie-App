@@ -15,8 +15,12 @@ import { Link } from "@react-navigation/native";
 const DetailTab = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#ff4081" }}>
-      <Link to={{ screen: "Photos" }}>Go to Photos</Link>
-      <Link to={{ screen: "Videos" }}>Go to Videos</Link>
+      <Link to={{ screen: "Photos" }}>
+        <Text>Go to Photos</Text>
+      </Link>
+      <Link to={{ screen: "Videos" }}>
+        <Text>Go to Videos</Text>
+      </Link>
     </View>
   );
 };

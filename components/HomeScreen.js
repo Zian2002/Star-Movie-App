@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import React, { useState } from "react";
-import { SceneMap, TabView } from "react-native-tab-view";
+import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Link } from "@react-navigation/native";
 
@@ -10,8 +10,10 @@ const Stack = createNativeStackNavigator();
 const MovieTab = (props) => {
   return (
     <View>
-      {props.title}
-      <Link to={{ screen: "MovieDetailRouter", params: {} }}>detail</Link>
+      <Text>{props.title}</Text>
+      <Link to={{ screen: "MovieDetailRouter", params: {} }}>
+        <Text>Detail</Text>
+      </Link>
     </View>
   );
 };
@@ -41,15 +43,31 @@ const HomeScreen = () => {
   ]);
 
   return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
-    />
+    <View style={styles.container}>
+      <Text>jshdjkl</Text>
+
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{}}
+        // renderTabBar={(routes) => {
+        //   return <TabBar title={routes.title}/>
+        // }}
+      />
+    </View>
   );
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 15,
+  },
+  tabOption: {
+    width: "80%",
+    marginHorizontal: "auto",
+    borderRadius: 30,
+  },
+});

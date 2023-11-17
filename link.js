@@ -11,7 +11,6 @@ const API = {
 //: /videos
 //: /images
 //: /recommendations
-//: /similar
-
+4
 
 export default API;
