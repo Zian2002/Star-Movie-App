@@ -48,11 +48,7 @@ const HomeRouter = () => {
             const color = focused ? "#E51937" : "#fff";
 
             return (
-              <MaterialCommunityIcons
-                name="movie-search"
-                size={26}
-                color={color}
-              />
+              <MaterialCommunityIcons name="magnify" size={26} color={color} />
             );
           },
         }}

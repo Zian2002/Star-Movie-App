@@ -5,12 +5,14 @@ const API = {
   GENRES_API_URL: "https://api.themoviedb.org/3/genre/movie/list",
   NOW_PLAYING_API_URL: "https://api.themoviedb.org/3/movie/now_playing",
   POPULAR_API_URL: "https://api.themoviedb.org/3/movie/popular",
+  UPCOMMING_API_API: "https://api.themoviedb.org/3/movie/upcoming",
+  ENDPOINT_IMG: "https://image.tmdb.org/t/p/original",
 };
 //: /similar
 //: /reviews
 //: /videos
 //: /images
 //: /recommendations
-4
+4;
 
 export default API;
