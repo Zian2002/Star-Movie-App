@@ -37,6 +37,9 @@ const DetailTab = ({ id }) => {
       <Link to={{ screen: "Videos" }}>
         <Text>Go to Videos</Text>
       </Link>
+      <Link to={{ screen: "Casts" }}>
+        <Text>Go to Cast</Text>
+      </Link>
     </View>
   );
 };
