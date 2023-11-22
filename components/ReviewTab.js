@@ -6,11 +6,11 @@ import Icon from "react-native-vector-icons/FontAwesome";
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const reviewUrl = "https://image.tmdb.org/t/p/original";
 
-const ReviewTab = () => {
+const ReviewTab = ({id}) => {
   const [reivew, setReview] = useState([]);
 
   const getData = async () => {
-    const response = await axios.get(`${link.DETAIL_API_URL}/507089/reviews`, {
+    const response = await axios.get(`${link.DETAIL_API_URL}/${id}/reviews`, {
       params: {
         api_key: "3e00879c372fa95105031194f23c87d2",
       },
@@ -91,9 +91,10 @@ const ReviewTab = () => {
                   height: "50px",
                   borderRadius: "50%",
                 }}
-                source={{
-                  uri: `${reviewUrl}${item.author_details.avatar_path}`,
-                }}
+                source={item.author_details.avatar_path ? {
+                  
+                  uri:  `${reviewUrl}${item.author_details.avatar_path}`,
+                } : require("../assets/avatar.jpg")}
               />
               <View style={{ marginLeft: "15px" }}>
                 <Text

@@ -5,11 +5,11 @@ import link from "../link";
 
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const imageUrl = "https://image.tmdb.org/t/p/original";
-const PhotosScreen = () => {
+const PhotosScreen = ({route}) => {
   const [images, setImages] = useState([]);
-
+  const {id} = route.params;
   const getData = async () => {
-    const response = await axios.get(`${link.DETAIL_API_URL}/507089/images`, {
+    const response = await axios.get(`${link.DETAIL_API_URL}/${id}/images`, {
       params: {
         api_key: "3e00879c372fa95105031194f23c87d2",
       },

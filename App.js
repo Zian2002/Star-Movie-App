@@ -10,12 +10,12 @@ import LoginScreen from "./components/LoginScreen";
 
 export default function App() {
   return (
-    // <NavigationContainer>
-    //   <Router />
-    // </NavigationContainer>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
     // <PhotosScreen />
     // <CastScreen />
-    <ReviewTab />
+    // <ReviewTab />
     // <VideoScreen />
     // <LoginScreen />
   );
