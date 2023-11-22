@@ -3,6 +3,7 @@ import React from "react";
 import MovieDetail from "../components/MovieDetail";
 import PhotosScreen from "../components/PhotosScreen";
 import VideosScreen from "../components/VideosScreen";
+import CastScreen from "../components/CastScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   Link,
@@ -46,6 +47,11 @@ const MovieDetailRouter = () => {
         name="Detail"
         component={MovieDetail}
         options={{ title: "", headerShown: false }}
+        initialParams={{ id }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="Casts"
+        component={CastScreen}
         initialParams={{ id }}
       ></Stack.Screen>
       <Stack.Screen
