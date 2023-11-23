@@ -37,38 +37,32 @@ const CastScreen = ({ route }) => {
               style={{
                 width: "50px",
                 height: "50px",
-                marginLeft: "4px",
+                marginLeft: "10px",
                 marginTop: "15px",
                 borderRadius: "50%",
               }}
-              source={{
-                uri: `${castUrl}${item.profile_path}`,
-              }}
+              source={
+                item.profile_path
+                  ? {
+                      uri: `${castUrl}${item.profile_path}`,
+                    }
+                  : require("../assets/avatar.jpg")
+              }
             />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: "30px",
-                marginLeft: "10px",
+                flexDirection: "column",
+                marginTop: "20px",
+                marginLeft: "20px",
               }}
             >
-              <Text style={{ color: "#fff", fontSize: "16px", width: "165px" }}>
+              <Text style={{ color: "#fff", fontSize: "16px" }}>
                 {item.original_name}
-              </Text>
-              <Text
-                style={{
-                  color: "#575f6b",
-                  fontSize: "16px",
-                  marginLeft: "20px",
-                }}
-              >
-                •••
               </Text>
               <Text
                 style={{
                   color: "#7b8087",
                   fontSize: "16px",
-                  marginLeft: "20px",
                 }}
               >
                 {item.character}

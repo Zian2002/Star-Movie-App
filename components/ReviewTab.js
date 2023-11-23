@@ -5,18 +5,24 @@ import link from "../link";
 import Icon from "react-native-vector-icons/FontAwesome";
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const reviewUrl = "https://image.tmdb.org/t/p/original";
+import API from "../link";
 
 const ReviewTab = ({ id }) => {
-  const [reivew, setReview] = useState([]);
+  const [review, setReview] = useState([]);
+  const [vote, setVote] = useState();
 
   const getData = async () => {
-    const response = await axios.get(`${link.DETAIL_API_URL}/${id}/reviews`, {
+    const response = await axios.get(`${link.DETAIL_API_URL}/${id}`, {
       params: {
-        api_key: "3e00879c372fa95105031194f23c87d2",
+        // api_key: "3e00879c372fa95105031194f23c87d2",
+        api_key: API.API_KEY,
+        append_to_response: "reviews",
       },
     });
-    console.log(response);
-    setReview(response.data.results);
+    console.log("review", response);
+    setReview(response.data.reviews.results);
+    console.log("vote", response);
+    setVote(response.data.vote_average);
   };
   // getData();
   useEffect(() => {
@@ -40,7 +46,7 @@ const ReviewTab = ({ id }) => {
               marginRight: "10px",
             }}
           >
-            4.6/5
+            {(vote / 2).toFixed(1)}
           </Text>
           <Icon
             name="star"
@@ -49,11 +55,11 @@ const ReviewTab = ({ id }) => {
             style={{ marginTop: "8px" }}
           ></Icon>
         </View>
-        <Text style={{ color: "#878d95" }}>{reivew.length} Reviews</Text>
+        <Text style={{ color: "#878d95" }}>{review.length} Reviews</Text>
       </View>
-      {reivew.map((item, index) => {
+      {review.map((item, index) => {
         return (
-          <View style={{ margin: "15px" }}>
+          <View style={{ margin: "15px" }} key={index}>
             <View style={{ backgroundColor: "#2b3543", padding: "15px" }}>
               <Text></Text>
               <Icon name="star" color="#f8c42f" size={20}></Icon>

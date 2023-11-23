@@ -2,15 +2,16 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import link from "../link";
-// import YouTube from "react-native-youtube";
+import YouTube from "react-youtube";
 
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const videoUrl = "https://image.tmdb.org/t/p/original";
-const VideosScreen = () => {
+const VideosScreen = ({ route }) => {
+  const { id } = route.params;
   const [video, setVideo] = useState([]);
 
   const getData = async () => {
-    const response = await axios.get(`${link.DETAIL_API_URL}/507089/videos`, {
+    const response = await axios.get(`${link.DETAIL_API_URL}/${id}/videos`, {
       params: {
         api_key: "3e00879c372fa95105031194f23c87d2",
       },
@@ -23,30 +24,45 @@ const VideosScreen = () => {
     getData();
   }, []);
   return (
-    <View style={{ width: "100%", backgroundColor: "#0F1B2B" }}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        backgroundColor: "#0F1B2B",
+        minHeight: "auto",
+      }}
+    >
       {video.map((item, index) => {
         return (
-          <View>
-            {/* <Youtube
+          <View style={{ width: "300px", height: "250px", margin: "10px" }}>
+            <YouTube
               videoId={item.key}
-              play={playing}
-              onChangeState={(e) => {
-                if (e.state === "ended") {
-                  setPlaying(false);
+              style={
+                {
+                  // width: "300px",
+                  // height: "100px",
+                  // margin: "15px",
+                  // borderRadius: "5px",
+                  // margin: "20px",
                 }
+              }
+              opts={{
+                playerVars: {
+                  // disablekb: 1,
+                  // controls: 1,
+                  // width: 100,
+                  // height: 100,
+                  // autoplay: 0,
+                  // loop: 1,
+                  height: "390px",
+                  width: "640px",
+                  playerVars: {
+                    // https://developers.google.com/youtube/player_parameters
+                    autoplay: 1,
+                  },
+                },
               }}
-            ></Youtube> */}
-            {/* <YouTube
-              videoId="KVZ-P-ZI6W4" // The YouTube video ID
-              play // control playback of video with true/false
-              fullscreen // control whether the video should play in fullscreen or inline
-              loop // control whether the video should loop when ended
-              onReady={(e) => this.setState({ isReady: true })}
-              onChangeState={(e) => this.setState({ status: e.state })}
-              onChangeQuality={(e) => this.setState({ quality: e.quality })}
-              onError={(e) => this.setState({ error: e.error })}
-              style={{ alignSelf: "stretch", height: 300 }}
-            /> */}
+            ></YouTube>
           </View>
         );
       })}
