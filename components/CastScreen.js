@@ -5,9 +5,9 @@ import link from "../link";
 
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const castUrl = "https://image.tmdb.org/t/p/original";
-const CastScreen = ({route}) => {
+const CastScreen = ({ route }) => {
   const [cast, setCast] = useState([]);
-  const {id} = route.params;
+  const { id } = route.params;
 
   const getData = async () => {
     const response = await axios.get(`${link.DETAIL_API_URL}/${id}/casts`, {
@@ -27,6 +27,7 @@ const CastScreen = ({route}) => {
       {cast.map((item, index) => {
         return (
           <View
+            key={index}
             style={{
               display: "flex",
               flexDirection: "row",

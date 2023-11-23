@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const reviewUrl = "https://image.tmdb.org/t/p/original";
 
-const ReviewTab = ({id}) => {
+const ReviewTab = ({ id }) => {
   const [reivew, setReview] = useState([]);
 
   const getData = async () => {
@@ -91,10 +91,13 @@ const ReviewTab = ({id}) => {
                   height: "50px",
                   borderRadius: "50%",
                 }}
-                source={item.author_details.avatar_path ? {
-                  
-                  uri:  `${reviewUrl}${item.author_details.avatar_path}`,
-                } : require("../assets/avatar.jpg")}
+                source={
+                  item.author_details.avatar_path
+                    ? {
+                        uri: `${reviewUrl}${item.author_details.avatar_path}`,
+                      }
+                    : require("../assets/avatar.jpg")
+                }
               />
               <View style={{ marginLeft: "15px" }}>
                 <Text

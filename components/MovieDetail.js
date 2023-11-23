@@ -52,7 +52,7 @@ const MovieDetail = ({ route }) => {
 
   const getMovieDetail = async () => {
     //nho doi lai id
-    const response = await axios.get(`${API.DETAIL_API_URL}/${299054}`, {
+    const response = await axios.get(`${API.DETAIL_API_URL}/${id}`, {
       params: {
         api_key: API.API_KEY,
         append_to_response: "videos,genres",
@@ -63,7 +63,9 @@ const MovieDetail = ({ route }) => {
     setTrailer(
       response.data.videos.results.find(
         (item) =>
-          item.name === "Final Trailer" || item.name === "Official Trailer"
+          item.name === "Final Trailer" ||
+          item.name === "Official Trailer" ||
+          item.name.includes("Trailer")
       )
     );
   };
@@ -76,10 +78,12 @@ const MovieDetail = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={{}}>
-        <Link to={{ screen: "HomeRouter" }} style={{ position: "absolute" }}>
-          <Text style={{ color: "#fff" }}>Home</Text>
-        </Link>
-        <View style={{ width: "100%", height: 225 }}>
+        <View
+          style={{
+            width: "100%",
+            height: 225,
+          }}
+        >
           <ReactPlayer
             width={"100%"}
             height={255}
@@ -92,13 +96,20 @@ const MovieDetail = ({ route }) => {
             }}
           />
         </View>
-        <View style={{ display: "flex", flexDirection: "row" }}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginBottom: 10,
+            marginTop: 10,
+          }}
+        >
           <Image
             style={{
               width: 125,
               height: 175,
               resizeMode: "contain",
-              borderRadius: 10,
+              borderRadius: 20,
             }}
             source={
               movieDetail && {
@@ -106,9 +117,11 @@ const MovieDetail = ({ route }) => {
               }
             }
           />
-          <View>
-            <Text>{movieDetail && movieDetail.original_title}</Text>
-            <Text>
+          <View style={{ marginLeft: 15, display: "flex", rowGap: 5 }}>
+            <Text style={{ color: "#fff", fontSize: 24, fontWeight: 500 }}>
+              {movieDetail && movieDetail.original_title}
+            </Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>
               {movieDetail?.genres.length > 0 &&
                 movieDetail.genres.map((item, index) => {
                   if (index === movieDetail.genres.length - 1) return item.name;
@@ -116,8 +129,10 @@ const MovieDetail = ({ route }) => {
                 })}
             </Text>
 
-            <Text>Release date : {movieDetail?.release_date}</Text>
-            <Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>
+              Release date : {movieDetail?.release_date}
+            </Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>
               Language :{" "}
               {movieDetail &&
                 movieDetail.spoken_languages.length > 0 &&
@@ -183,11 +198,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#0F1B2B", // Customize the background color of the tab bar
     borderRadius: 40,
     borderWidth: 1,
-    borderColor: "#eee",
+    borderColor: "#333",
+    width: "60%",
+    height: 30,
+    marginHorizontal: "auto",
   },
   labelStyle: {
     color: "#fff",
-    fontSize: 15,
+    fontSize: 13,
+    marginTop: -20,
   },
   indicatorStyle: {
     backgroundColor: "red", // line

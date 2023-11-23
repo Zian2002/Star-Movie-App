@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { Link } from "@react-navigation/native";
@@ -10,15 +10,16 @@ import { ScrollView } from "react-native-web";
 // Phần code giao diện chung chung cho Now Showing và Coming Soon
 const MovieTab = (props) => {
   const [movies, setMovies] = useState([]);
-
+  let page = 1;
   const getData = async () => {
     const response = await axios.get(`${API.DETAIL_API_URL}/${props.title}`, {
       params: {
         api_key: API.API_KEY,
+        page: page,
       },
     });
     console.log(response);
-    setMovies(response.data.results);
+    setMovies([...movies, ...response.data.results]);
   };
   useEffect(() => {
     getData();
@@ -29,7 +30,7 @@ const MovieTab = (props) => {
         ...styles.flexRowCenter,
         justifyContent: "space-around",
         marginTop: 10,
-        paddingBottom: 10,
+        paddingBottom: 250,
         flexWrap: "wrap",
         overflow: "scroll",
         height: "100vh",
@@ -96,6 +97,21 @@ const MovieTab = (props) => {
           </Link>
         );
       })}
+      <TouchableOpacity
+        style={{
+          padding: 7,
+          backgroundColor: "#E51937",
+          marginLeft: "auto",
+          marginRight: "auto",
+          borderRadius: 10,
+        }}
+        onPress={() => {
+          page++;
+          getData();
+        }}
+      >
+        <Text style={{ color: "#fff" }}>Load more</Text>
+      </TouchableOpacity>
     </View>
   );
 };

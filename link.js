@@ -7,6 +7,7 @@ const API = {
   POPULAR_API_URL: "https://api.themoviedb.org/3/movie/popular",
   UPCOMMING_API_API: "https://api.themoviedb.org/3/movie/upcoming",
   ENDPOINT_IMG: "https://image.tmdb.org/t/p/original",
+  SEARCH_API: "https://api.themoviedb.org/3/search/movie?query=",
 };
 //: /similar
 //: /reviews

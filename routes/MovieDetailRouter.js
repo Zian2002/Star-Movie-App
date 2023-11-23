@@ -19,29 +19,36 @@ const Stack = createNativeStackNavigator();
 const CustomBackButton = () => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={() => navigation.goBack()}>
-      {/* Replace the Image component with your custom back button icon */}
-      <MaterialCommunityIcons name="arrow-left" color={"#fff"} size={30} />
+    <TouchableOpacity
+      style={{ paddingHorizontal: 10 }}
+      onPress={() => navigation.goBack()}
+    >
+      <MaterialCommunityIcons name="arrow-left" color={"#fff"} size={25} />
     </TouchableOpacity>
   );
 };
 
 const MovieDetailRouter = () => {
-  // const route = useRoute();
-  // const { id } = route.params;
-  const id = 496450;
+  const route = useRoute();
+  const { id } = route.params;
+  // const id = 496450;
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          height: 30,
+          height: 40,
           backgroundColor: "#0F1B2B",
         },
         headerTitleStyle: { color: "#fff" },
-        headerRight: () => <Link to={{ screen: "HomeRouter" }}>Home</Link>,
+        headerRight: () => (
+          <Link to={{ screen: "HomeRouter" }} style={{ paddingHorizontal: 10 }}>
+            <MaterialCommunityIcons name="home" color={"#fff"} size={25} />
+          </Link>
+        ),
         headerLeft: () => <CustomBackButton />,
         // headerShadowVisible: false,
         statusBarHidden: false,
+        initialParams: { id },
       }}
     >
       <Stack.Screen

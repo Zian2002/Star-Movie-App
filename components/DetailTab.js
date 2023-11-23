@@ -1,4 +1,5 @@
 import {
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -33,25 +34,58 @@ const DetailTab = ({ id }) => {
   const [movieDetail, setMovieDetail] = useState(null);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#0F1B2B" }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#0F1B2B",
+        paddingHorizontal: 20,
+        marginTop: 20,
+      }}
+    >
       <View>
-        <Text>Overview</Text>
-        <Text>{movieDetail?.overview}</Text>
+        <Text
+          style={{
+            fontSize: 18,
+            color: "#ffff",
+            fontWeight: 500,
+            marginBottom: 15,
+          }}
+        >
+          Overview
+        </Text>
+        <Text
+          style={{
+            color: "#fff",
+            marginBottom: 20,
+            lineHeight: 20,
+            fontSize: 13,
+          }}
+        >
+          {movieDetail?.overview}
+        </Text>
       </View>
 
       <View>
-        <View>
-          <Text>Cast & Crew</Text>
+        <View
+          style={{
+            ...styles.flexRowCenter,
+            justifyContent: "space-between",
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 18, fontWeight: 500 }}>
+            Cast & Crew
+          </Text>
           <Link to={{ screen: "Casts" }}>
-            <Text>View more</Text>
+            <Text style={{ color: "#47CFFF" }}>View all</Text>
           </Link>
         </View>
-        <View>
+        <View style={{ marginBottom: 15 }}>
           {movieDetail &&
             movieDetail.casts.cast.length > 0 &&
-            movieDetail.casts.cast.map((item, index) => {
+            movieDetail.casts.cast.slice(0, 4).map((item, index) => {
               return (
                 <View
+                  key={index}
                   style={{
                     display: "flex",
                     flexDirection: "row",
@@ -80,13 +114,13 @@ const DetailTab = ({ id }) => {
                       marginLeft: "20px",
                     }}
                   >
-                    <Text style={{ color: "#fff", fontSize: "16px" }}>
+                    <Text style={{ color: "#fff", fontSize: 14 }}>
                       {item.original_name}
                     </Text>
                     <Text
                       style={{
                         color: "#7b8087",
-                        fontSize: "16px",
+                        fontSize: 14,
                       }}
                     >
                       {item.character}
@@ -96,21 +130,61 @@ const DetailTab = ({ id }) => {
               );
             })}
         </View>
+        <View>
+          <View
+            style={{
+              ...styles.flexRowCenter,
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 18, fontWeight: 500 }}>
+              Photo
+            </Text>
+            <Link to={{ screen: "Photos" }}>
+              <Text style={{ color: "#47CFFF" }}>View all</Text>
+            </Link>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              overflow: "scroll",
+            }}
+          >
+            {movieDetail &&
+              movieDetail.images.backdrops.length > 0 &&
+              movieDetail.images.backdrops.slice(0, 4).map((item, index) => {
+                return (
+                  <Image
+                    key={index}
+                    style={{
+                      width: 130,
+                      height: 95,
+                      resizeMode: "contain",
+                      marginRight: 10,
+                      borderRadius: 20,
+                    }}
+                    source={
+                      item.file_path && {
+                        uri: `${API.ENDPOINT_IMG}${item.file_path}`,
+                      }
+                    }
+                  />
+                );
+              })}
+          </View>
+        </View>
       </View>
-
-      {/* <Link to={{ screen: "Photos" }}>
-        <Text>Go to Photos</Text>
-      </Link>
-      <Link to={{ screen: "Videos" }}>
-        <Text>Go to Videos</Text>
-      </Link>
-      <Link to={{ screen: "Casts" }}>
-        <Text>Go to Cast</Text>
-      </Link> */}
     </View>
   );
 };
 
 export default DetailTab;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  flexRowCenter: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+});
