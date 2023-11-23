@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import link from "../link";
-import YouTube from "react-youtube";
 
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const videoUrl = "https://image.tmdb.org/t/p/original";
