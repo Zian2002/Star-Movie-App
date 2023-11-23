@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import link from "../link";
-import YouTube from "react-youtube";
 
 const APi = "https://api.themoviedb.org/3/discover/movie";
 const videoUrl = "https://image.tmdb.org/t/p/original";
@@ -32,7 +31,7 @@ const VideosScreen = ({ route }) => {
         minHeight: "auto",
       }}
     >
-      {video.map((item, index) => {
+      {/* {video.map((item, index) => {
         return (
           <View style={{ width: "300px", height: "250px", margin: "10px" }}>
             <YouTube
@@ -65,7 +64,7 @@ const VideosScreen = ({ route }) => {
             ></YouTube>
           </View>
         );
-      })}
+      })} */}
     </View>
   );
 };
