@@ -1,4 +1,5 @@
 import {
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -15,12 +16,13 @@ import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import DetailTab from "./DetailTab";
 import axios from "axios";
 import API from "../link";
+import ReactPlayer from "react-player";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+// import YouTube, { YouTubeStandaloneIOS } from "react-native-youtube";
+// import Youtube from "react-native-youtube-iframe";
 
 const Stack = createNativeStackNavigator();
-// const renderScene = SceneMap({
-//   first: DetailTab,
-//   second: ReviewTab,
-// });
 
 const MovieDetail = ({ route }) => {
   const layout = useWindowDimensions();
@@ -33,7 +35,6 @@ const MovieDetail = ({ route }) => {
 
   const { id } = route.params;
 
-  //chat
   const renderScene = ({ route }) => {
     const { key } = route;
     switch (key) {
@@ -46,7 +47,8 @@ const MovieDetail = ({ route }) => {
     }
   }; //
 
-  const [movieDetail, setMovieDetail] = useState({});
+  const [movieDetail, setMovieDetail] = useState(null);
+  const [trailer, setTrailer] = useState({});
 
   const getMovieDetail = async () => {
     //nho doi lai id
@@ -58,16 +60,89 @@ const MovieDetail = ({ route }) => {
     });
     console.log("detail", response);
     setMovieDetail(response.data);
+    setTrailer(
+      response.data.videos.results.find(
+        (item) =>
+          item.name === "Final Trailer" || item.name === "Official Trailer"
+      )
+    );
   };
 
   useEffect(() => {
     getMovieDetail();
   }, []);
+  //alignSelf: "stretch"
 
   return (
     <View style={styles.container}>
-      <Text>Up content</Text>
-      <Link to={{screen : "HomeRouter"}}><Text>Home</Text></Link>
+      <View style={{}}>
+        <Link to={{ screen: "HomeRouter" }} style={{ position: "absolute" }}>
+          <Text style={{ color: "#fff" }}>Home</Text>
+        </Link>
+        <View style={{ width: "100%", height: 225 }}>
+          <ReactPlayer
+            width={"100%"}
+            height={255}
+            url={trailer && `https://www.youtube.com/watch?v=${trailer.key}`}
+            controls={true}
+            config={{
+              youtube: {
+                playerVars: { showinfo: 0, controls: 1 },
+              },
+            }}
+          />
+        </View>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Image
+            style={{
+              width: 125,
+              height: 175,
+              resizeMode: "contain",
+              borderRadius: 10,
+            }}
+            source={
+              movieDetail && {
+                uri: `${API.ENDPOINT_IMG}${movieDetail.poster_path}`,
+              }
+            }
+          />
+          <View>
+            <Text>{movieDetail && movieDetail.original_title}</Text>
+            <Text>
+              {movieDetail?.genres.length > 0 &&
+                movieDetail.genres.map((item, index) => {
+                  if (index === movieDetail.genres.length - 1) return item.name;
+                  return item.name + ", ";
+                })}
+            </Text>
+
+            <Text>Release date : {movieDetail?.release_date}</Text>
+            <Text>
+              Language :{" "}
+              {movieDetail &&
+                movieDetail.spoken_languages.length > 0 &&
+                movieDetail.spoken_languages.map((item, index) => {
+                  if (index === movieDetail.spoken_languages.length - 1)
+                    return item.name;
+                  return item.name + ", ";
+                })}
+            </Text>
+            <View style={{ ...styles.flexRowCenter }}>
+              <Text style={{ color: "#fff" }}>
+                {movieDetail && (movieDetail.vote_average / 2).toFixed(1)}
+              </Text>
+              <MaterialCommunityIcons
+                name="star"
+                color={"yellow"}
+                size={20}
+              ></MaterialCommunityIcons>
+              <Text style={{ color: "#fff", marginLeft: 5 }}>
+                ({movieDetail && movieDetail.vote_count})
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
@@ -97,6 +172,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#0F1B2B",
     minHeight: "100vh",
+    position: "relative",
   },
   tabOption: {
     width: "80%",
@@ -118,5 +194,10 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 40,
     width: "50%",
+  },
+  flexRowCenter: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

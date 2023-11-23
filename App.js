@@ -7,15 +7,17 @@ import CastScreen from "./components/CastScreen";
 import ReviewTab from "./components/ReviewTab";
 import VideoScreen from "./components/VideosScreen";
 import LoginScreen from "./components/LoginScreen";
+import MovieDetailRouter from "./routes/MovieDetailRouter";
 
 export default function App() {
   return (
-    // <NavigationContainer>
-    //   <Router />
-    // </NavigationContainer>
+    <NavigationContainer>
+      <MovieDetailRouter />
+      {/* <Router /> */}
+    </NavigationContainer>
     // <PhotosScreen />
     // <CastScreen />
-    <ReviewTab />
+    // <ReviewTab />
     // <VideoScreen />
     // <LoginScreen />
   );
