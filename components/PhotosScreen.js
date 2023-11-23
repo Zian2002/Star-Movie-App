@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import link from "../link";
 
-const APi = "https://api.themoviedb.org/3/discover/movie";
 const imageUrl = "https://image.tmdb.org/t/p/original";
-const PhotosScreen = ({route}) => {
+const PhotosScreen = ({ route }) => {
   const [images, setImages] = useState([]);
-  const {id} = route.params;
+  const { id } = route.params;
   const getData = async () => {
     const response = await axios.get(`${link.DETAIL_API_URL}/${id}/images`, {
       params: {
@@ -27,6 +26,7 @@ const PhotosScreen = ({route}) => {
       {images.map((item, index) => {
         return (
           <Image
+            key={index}
             style={{
               width: "340px",
               height: "224px",
