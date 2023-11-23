@@ -41,7 +41,7 @@ const MovieTab = (props) => {
         return (
           <Link
             key={index}
-            to={{ screen: "MovieDetailRouter", params: {id : item.id} }}
+            to={{ screen: "MovieDetailRouter", params: { id: item.id } }}
             style={{
               width: "48%",
               marginBottom: 15,
@@ -61,9 +61,9 @@ const MovieTab = (props) => {
                 }}
                 source={{ uri: `${API.ENDPOINT_IMG}${item.poster_path}` }}
               />
-              <View style={{ padding : 10}}>
+              <View style={{ padding: 10 }}>
                 {/* rate */}
-                <View style={{ ...styles.flexRowCenter, marginVertical : 5 }}>
+                <View style={{ ...styles.flexRowCenter, marginVertical: 5 }}>
                   <Text style={{ color: "#fff" }}>
                     {(item.vote_average / 2).toFixed(1)}
                   </Text>
@@ -72,7 +72,9 @@ const MovieTab = (props) => {
                     color={"yellow"}
                     size={20}
                   ></MaterialCommunityIcons>
-                  <Text style={{ color: "#fff" , marginLeft : 5}}>({item.vote_count})</Text>
+                  <Text style={{ color: "#fff", marginLeft: 5 }}>
+                    ({item.vote_count})
+                  </Text>
                 </View>
                 {/* name */}
                 <View style={{ flex: 1 }}>
