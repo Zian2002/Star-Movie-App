@@ -32,7 +32,7 @@ const MovieTab = (props) => {
         paddingBottom: 10,
         flexWrap: "wrap",
         overflow: "scroll",
-        height: 470,
+        height: "100vh",
         columnGap: 5,
         alignItems: "stretch",
       }}
@@ -206,7 +206,6 @@ const styles = StyleSheet.create({
     backgroundColor: "red", // line
     height: "100%",
     borderRadius: 40,
-    width: "50%",
   },
   flexRowCenter: {
     display: "flex",

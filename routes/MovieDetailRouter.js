@@ -27,8 +27,9 @@ const CustomBackButton = () => {
 };
 
 const MovieDetailRouter = () => {
-  const route = useRoute();
-  const { id } = route.params;
+  // const route = useRoute();
+  // const { id } = route.params;
+  const id = 496450;
   return (
     <Stack.Navigator
       screenOptions={{
@@ -46,7 +47,7 @@ const MovieDetailRouter = () => {
       <Stack.Screen
         name="Detail"
         component={MovieDetail}
-        options={{ title: "", headerShown: false }}
+        options={{ title: "" }}
         initialParams={{ id }}
       ></Stack.Screen>
       <Stack.Screen

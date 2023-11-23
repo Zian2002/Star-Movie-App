@@ -23,7 +23,7 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-web": "~0.19.6",
     "react-native-youtube": "^2.0.2",
-    "react-youtube": "^10.1.0"
+    "react-player": "^2.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
